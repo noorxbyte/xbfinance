@@ -1,0 +1,39 @@
+/*
+ * Global custom CSS
+ */
+
+.table-nonfluid
+{
+	width: auto;
+	margin: 0 auto !important;
+   	float: none !important;
+}
+
+/* left align table's cells */
+td
+{
+	text-align: left;
+}
+
+/* center align container contents */
+.container
+{
+	margin-left: auto;
+    margin-right: auto;
+}
+
+/* center align headings and footer */
+h3, h4, #bottom
+{
+    text-align: center;
+}
+
+/* footer styles */
+#bottom
+{
+    /* shrink bottom's font size */
+    font-size: smaller;
+
+    /* surround with whitespace */
+    margin: 20px;
+}
