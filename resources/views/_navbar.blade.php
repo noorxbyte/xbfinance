@@ -2,7 +2,7 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="{{ route('home') }}">XByte Finance</a>
+            <a class="navbar-brand" href="{{ route('home') }}"><span class="glyphicon glyphicon-home"></span> XByte Finance</a>
         </div>
         <div>
             <ul class="nav navbar-nav">
@@ -33,7 +33,15 @@
                 <li><a href="{{ route('transfers.index') }}">Transfers</a></li>
                 <li><a href="{{ route('payees.index') }}">Payees</a></li>
                 <li><a href="{{ route('categories.index') }}">Categories</a></li>
-                <li><a href="{{ route('logout') }}"><strong>Logout</strong></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @if(Auth::check())
+                    <li><a href="{{ route('logout') }}"><span class="glyphicon glyphicon-log-out"></span> <strong>Logout</strong></a></li>
+                @else
+                    <li><a href="{{ route('register') }}"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+                    <li><a href="{{ route('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                @endif
+            </ul>
             </ul>
         </div>
     </div>

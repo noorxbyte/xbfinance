@@ -15,6 +15,12 @@ td
 	text-align: left;
 }
 
+.group span
+{
+    display: inline-block;
+    text-align: right;
+}
+
 /* center align container contents */
 .container
 {

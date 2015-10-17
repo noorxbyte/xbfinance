@@ -37,25 +37,28 @@
 
 	<!-- Remember -->
 	<div class="form-group">
-		<label class="col-md-4 control-label" for=""></label>
+		<label class="col-md-4 control-label" for="checkbox"></label>
 		<div class="col-md-4">
 			<input type="checkbox" name="remember"> Remember Me
 		</div>
 	</div>
 
-	<!-- Remember -->
+	<!-- Submit & Register -->
 	<div class="form-group">
 		<label class="col-md-4 control-label" for=""></label>
 		<div class="col-md-4">
-			<div class="text-right"><a href="{{ route('register') }}">Register</a> for an account</div>
+			<div class="group">
+				<button class="btn btn-primary">Log in</button>&nbsp;&nbsp;&nbsp;
+				<span class="pull-right"><a href="{{ route('register') }}"><u>Register for an account</u></a></span>
+			</div>
 		</div>
 	</div>
 
-	<!-- Submit -->
+	<!-- Forgot Password -->
 	<div class="form-group">
-		<label class="col-md-4 control-label" for=""></label>
+		<label class="col-md-4 control-label" for="checkbox"></label>
 		<div class="col-md-4">
-			<button id="" name="" class="btn btn-primary">Log in</button>
+			<a href="{{ route('reset.getEmail') }}">Forgot Password?</a>
 		</div>
 	</div>
 
