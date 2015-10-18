@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/css/bootstrap.css">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="/css/themes/bootstrap-{{ $usertheme or 'default' }}.css">
 
     <!-- custom css -->
     <link rel="stylesheet" href="/css/style.css">

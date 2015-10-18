@@ -63,7 +63,7 @@
 	<div class="form-group">
 		<label class="col-md-4 control-label" for=""></label>
 		<div class="col-md-4">
-			<button id="" name="" class="btn btn-primary">Log in</button>
+			<button id="" name="" class="btn btn-primary">Register</button>
 		</div>
 	</div>
 

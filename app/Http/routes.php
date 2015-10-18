@@ -39,6 +39,12 @@ Route::group(['middleware' => 'auth'], function()
 	// payees routes
 	Route::resource('payees', 'PayeesController');
 
+	// user settings main page
+	Route::get('user/settings', ['as' => 'user.settings', 'uses' => 'UserController@index']);
+
+	// user settings change theme
+	Route::post('user/settings/theme', ['as' => 'user.settings.theme', 'uses' => 'UserController@changeTheme']);
+
 });
 
 // login routes....
@@ -69,6 +75,22 @@ View::composer('_navbar', function($view) {
 	if (isset(Auth::user()->id))
 	{
 		$nav_accounts = App\User::find(Auth::user()->id)->accounts;
-		$view->with('nav_accounts', $nav_accounts);
+		$username = Auth::user()->name;
+		$view->with('nav_accounts', $nav_accounts)->with('username', $username);
 	}
+});
+
+// pass theme into master page
+View::composer('master', function($view) {
+	if (isset(Auth::user()->id))
+	{
+		$usertheme = Auth::user()->theme;
+		$view->with('usertheme', $usertheme);
+	}
+});
+
+// pass theme list into settings page
+View::composer('user.index', function($view) {
+	$themes = App\Theme::orderBy('name')->get();
+	$view->with('themes', $themes);
 });

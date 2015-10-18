@@ -2,6 +2,17 @@
  * Global custom CSS
  */
 
+.nav-tabs > li, .nav-pills > li
+{
+    float:none;
+    display:inline-block;
+}
+
+.nav-tabs, .nav-pills
+{
+    text-align:center;
+}
+
 .table-nonfluid
 {
 	width: auto;

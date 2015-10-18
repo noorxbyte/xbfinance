@@ -40,4 +40,17 @@ $(document).ready(function() {
 		}
 	});
 
+	/*
+	 * Set active tab in user settings on redirect
+	 */
+	if(window.location.hash)
+	{
+		var obj = $('.nav-tabs a[href="' + window.location.hash + '"]');
+        obj.tab('show');
+    }
+    else
+    {
+    	$('.nav-tabs a[href="#validate"]').tab('show');
+    }
+
 });
