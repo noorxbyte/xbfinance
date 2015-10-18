@@ -43,9 +43,10 @@ $(document).ready(function() {
 	/*
 	 * Set active tab in user settings on redirect
 	 */
-	if(window.location.hash)
+	var hash = $('#active_id').val();
+	if(hash)
 	{
-		var obj = $('.nav-tabs a[href="' + window.location.hash + '"]');
+		var obj = $('.nav-tabs a[href="' + hash + '"]');
         obj.tab('show');
     }
     else

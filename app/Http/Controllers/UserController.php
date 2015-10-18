@@ -29,7 +29,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display all settings link
+     * Change user's theme
      *
      * @return \Illuminate\Http\Response
      */
@@ -55,6 +55,35 @@ class UserController extends Controller
         session()->flash('flash_message', 'Theme changed successfully.');
 
         // redirect to transfers list
-        return Redirect::to(URL::previous() . "#changeTheme");
+        return redirect()->back()->with('active_id', '#changeTheme');
+    }
+
+    /**
+     * Change user's name
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function changeName(Request $request)
+    {
+        // validate submission
+        if (!isset($request->name) || empty($request->name))
+        {
+            // stuff to pass into view
+            $title = "Error";
+            $errmsg = "Invalid Request.";
+
+            return view('errors.error', compact('errmsg', 'title', 'heading'));
+        }
+
+        // change user's name
+        $user = User::find(Auth::user()->id);
+        $user->name = $request->name;
+        $user->save();
+
+        // flash message
+        session()->flash('flash_message', 'Name changed successfully.');
+
+        // redirect to transfers list
+        return redirect()->back()->with('active_id', '#changeName');
     }
 }
