@@ -30,49 +30,21 @@
 		<div id="changeName" class="tab-pane fade">
 			<br/><br/>
 			<div class="text-center">
-				{!! Form::open(['action' => 'UserController@changeName', 'class' => 'form-inline']) !!}
-					<fieldset>
-						<!-- name -->
-						<div class="form-group">
-							<input type="text" name="name" placeholder="Your Name" class="form-control" value="{{ Auth::user()->name }}" max="255">
-						</div>
-						
-						<!-- submit -->
-						<div class="form-group">
-							<button type="submit" class="btn btn-primary">Change Name</button>
-						</div>
-					</fieldset>
-				{!! Form::close() !!}
+				@include('user._changeName')
 			</div>
 		</div>
 
 		<div id="changePass" class="tab-pane fade">
 			<br/><br/>
 			<div class="text-center">
-				// Change Pass
+				@include('user._changePass')
 			</div>
 		</div>
 
 		<div id="changeTheme" class="tab-pane fade">
 			<br/><br/>
 			<div class="text-center">
-				{!! Form::open(['action' => 'UserController@changeTheme', 'class' => 'form-inline']) !!}
-					<fieldset>
-						<!-- theme select -->
-						<div class="form-group">
-							<select class="form-control" name="theme">
-								@foreach($themes as $theme)
-									<option value="{{ $theme->id }}">{{ $theme->name }}</option>
-								@endforeach
-							</select>
-						</div>
-						
-						<!-- submit -->
-						<div class="form-group">
-							<button type="submit" class="btn btn-primary">Change Theme</button>
-						</div>
-					</fieldset>
-				{!! Form::close() !!}
+				@include('user._changeTheme')
 			</div>
 		</div>
 

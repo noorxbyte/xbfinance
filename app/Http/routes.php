@@ -45,6 +45,9 @@ Route::group(['middleware' => 'auth'], function()
 	// user settings change name
 	Route::post('user/settings/name', ['as' => 'user.settings.name', 'uses' => 'UserController@changeName']);
 
+	// user settings change password
+	Route::post('user/settings/password', ['as' => 'user.settings.password', 'uses' => 'UserController@changePass']);
+
 	// user settings change theme
 	Route::post('user/settings/theme', ['as' => 'user.settings.theme', 'uses' => 'UserController@changeTheme']);
 
