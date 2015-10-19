@@ -10,7 +10,7 @@
 
 	<div class="text-center">
 		<ul class="nav nav-tabs">
-			<li><a data-toggle="tab" href="#validate">Validate</a></li>
+			<li><a data-toggle="tab" href="#summary">Summary</a></li>
 			<li><a data-toggle="tab" href="#changeName">Change Name</a></li>
 			<li><a data-toggle="tab" href="#changePass">Change Password</a></li>
 			<li><a data-toggle="tab" href="#changeTheme">Theme</a></li>
@@ -20,10 +20,10 @@
 
 	<div class="tab-content">
 
-		<div id="validate" class="tab-pane fade">
+		<div id="summary" class="tab-pane fade">
 			<br/><br/>
 			<div class="text-center">
-				// Validate
+				@include('user._summary')
 			</div>
 		</div>
 

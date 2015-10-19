@@ -27,7 +27,7 @@ class CategoriesController extends Controller
         // get all transactions of the user
         $transactions = Transaction::where('user_id', Auth::user()->id)->get();
 
-        // calculate total income
+        // calculate total income and total expense
         $incomeTotal = $transactions->where('type', 'DEPOSIT')->sum('amount');
         $expenseTotal = $transactions->where('type', 'WITHDRAWAL')->sum('amount');
 

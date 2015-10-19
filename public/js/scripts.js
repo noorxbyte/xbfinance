@@ -51,7 +51,7 @@ $(document).ready(function() {
     }
     else
     {
-    	$('.nav-tabs a[href="#validate"]').tab('show');
+    	$('.nav-tabs a[href="#summary"]').tab('show');
     }
 
 });

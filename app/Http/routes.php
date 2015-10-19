@@ -95,8 +95,22 @@ View::composer('master', function($view) {
 	}
 });
 
-// pass theme list into settings page
-View::composer('user.index', function($view) {
+// pass theme list and user info into theme change page
+View::composer('user._changeTheme', function($view) {
+	// get theme list
 	$themes = App\Theme::orderBy('name')->get();
+
 	$view->with('themes', $themes);
+});
+
+// pass theme list and user info into summary page
+View::composer('user._summary', function($view) {
+	// get user info
+	$user = App\User::find(Auth::user()->id);
+
+	// calculate total income and total expense
+    $incomeTotal = App\User::find(Auth::user()->id)->transactions->where('type', 'DEPOSIT')->sum('amount');
+    $expenseTotal = App\User::find(Auth::user()->id)->transactions->where('type', 'WITHDRAWAL')->sum('amount');
+
+	$view->with('user', $user)->with('incomeTotal', $incomeTotal)->with('expenseTotal', $expenseTotal);
 });
