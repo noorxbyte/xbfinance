@@ -5,7 +5,7 @@
 @section('content')
 
 	@if(sizeof($transactions) > 0)
-		<table class="table table-striped">
+		<table class="table table-striped sortable">
 			<thead>
 				<th>Actions</th>
 				<th>Date</th>

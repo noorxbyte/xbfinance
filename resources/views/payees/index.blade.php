@@ -5,7 +5,7 @@
 @section('content')
 
 	@if(sizeof($payees) != 0)
-		<table class="table table-bordered table-nonfluid">
+		<table class="table table-bordered table-nonfluid sortable">
 			<thead>
 				<th>Actions</th>
 				<th>Payee Name</th>

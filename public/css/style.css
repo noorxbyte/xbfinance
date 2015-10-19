@@ -2,17 +2,27 @@
  * Global custom CSS
  */
 
+/* display hand on thead hover */
+th
+{
+    cursor: pointer;
+    cursor: hand;
+}
+
+/* center nav pills and tabs */
 .nav-tabs > li, .nav-pills > li
 {
     float:none;
     display:inline-block;
 }
 
+/* center nav pills and tabs */
 .nav-tabs, .nav-pills
 {
     text-align:center;
 }
 
+/* non fluid table */
 .table-nonfluid
 {
 	width: auto;
@@ -26,6 +36,7 @@ td
 	text-align: left;
 }
 
+/* used in login form */
 .group span
 {
     display: inline-block;

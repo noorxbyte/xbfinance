@@ -7,7 +7,7 @@
 
 	@if(sizeof($accounts) != 0)
 
-		<table class="table table-bordered table-nonfluid table-condensed">
+		<table class="table table-bordered table-nonfluid table-condensed sortable">
 			<thead>
 				<th>Actions</th>
 				<th>Accounts</th>

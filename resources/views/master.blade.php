@@ -25,6 +25,9 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="/js/bootstrap.js"></script>
 
+    <!-- Table sort script -->
+    <script src="/js/sorttable.js"></script>
+
     <!-- Custom scripts -->
     <script src="/js/scripts.js"></script>
 
