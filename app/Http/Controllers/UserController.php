@@ -127,4 +127,30 @@ class UserController extends Controller
         // redirect to transfers list
         return redirect()->back()->with('active_id', '#changePass');
     }
+
+    /**
+     * Delete User Account
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteAccount(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+
+        // check if password is correct
+        if (!Hash::check($request->password, $user->password))
+        {
+            // stuff to pass into view
+            $title = "Error";
+            $errmsg = "Your password is incorrect.";
+
+            return view('errors.error', compact('errmsg', 'title', 'heading'));
+        }
+
+        // delete user
+        $user->delete();
+
+        // redirect back
+        return redirect()->route('home');
+    }
 }

@@ -51,7 +51,7 @@
 		<div id="delAcc" class="tab-pane fade">
 			<br/><br/>
 			<div class="text-center">
-				// Delete Account
+				@include('user._deleteAccount')
 			</div>
 		</div>
 

@@ -51,6 +51,9 @@ Route::group(['middleware' => 'auth'], function()
 	// user settings change theme
 	Route::post('user/settings/theme', ['as' => 'user.settings.theme', 'uses' => 'UserController@changeTheme']);
 
+	// user account delete
+	Route::delete('user', ['as' => 'user.settings.delete', 'uses' => 'UserController@deleteAccount']);
+
 });
 
 // login routes....
