@@ -32,8 +32,8 @@
 
 						<td>{{ (new \DateTime($transaction['date']))->format('d/m/Y') }}</td>
 						<td>{{ $transaction['type'] }}</td>
-						<td><a href="{{ route('payees.show', $transaction['payee']) }}">{{ $transaction['payee']['name'] or 'N/A' }}</a></td>
-						<td><a href="{{ route('categories.show', $transaction['category']) }}">{{ $transaction['category']['name'] or 'N/A' }}</a></td>
+						<td><a href="{{ ($transaction['payee'] !== null) ? route('payees.show', $transaction['payee']) : route('payees.show', 0) }}">{{ $transaction['payee']['name'] or 'N/A' }}</a></td>
+						<td><a href="{{ ($transaction['category'] !== null) ? route('categories.show', $transaction['category']) : route('categories.show', 0) }}">{{ $transaction['category']['name'] or 'N/A' }}</a></td>
 						<td>${{ number_format($transaction['amount'], 2) }}</td>
 						<td>{{ $transaction['comment'] }}</td>
 					</tr>

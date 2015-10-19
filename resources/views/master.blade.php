@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="/css/bootstrap.css">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="/css/themes/bootstrap-{{ $usertheme or 'default' }}.css">
+    <link rel="stylesheet" href="/css/themes/bootstrap-{{ $usertheme or 'yeti' }}.css">
 
     <!-- custom css -->
     <link rel="stylesheet" href="/css/style.css">

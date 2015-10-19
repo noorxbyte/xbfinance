@@ -4,7 +4,7 @@
 		<div class="form-group">
 			<select class="form-control" name="theme">
 				@foreach($themes as $theme)
-					<option value="{{ $theme->id }}">{{ $theme->name }}</option>
+					<option value="{{ $theme->id }}">{{ strtoupper($theme->name) }}</option>
 				@endforeach
 			</select>
 		</div>
