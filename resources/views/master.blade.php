@@ -5,7 +5,7 @@
     <title>XByte Finance: {{ $title }}</title>
 
     <!-- favicon -->
-    <link rel="icon" type="image/png" href="favicon.ico">
+    <link rel="icon" type="image/png" href="/favicon.ico">
 
     <!-- jQuery -->
     <script src="/js/jquery.js"></script>
