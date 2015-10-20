@@ -47,10 +47,10 @@
 	<div class="form-group">
 		<label class="col-md-4 control-label" for=""></label>
 		<div class="col-md-4">
-			<div class="group">
+			<span>
 				<button class="btn btn-primary">Log in</button>&nbsp;&nbsp;&nbsp;
 				<span class="pull-right"><a href="{{ route('register') }}"><u>Register for an account</u></a></span>
-			</div>
+			</span>
 		</div>
 	</div>
 

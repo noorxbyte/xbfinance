@@ -58,7 +58,7 @@ $(document).ready(function() {
      * Dropdown on hover
      */
 	$(function() {
-		$('.dropdown').hover(function() {
+		$('.dropdown-hover').hover(function() {
 			$('ul.dropdown-menu', this).stop(true, true).slideDown('fast');
 			$(this).delay(200).addClass('open');
 		},

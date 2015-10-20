@@ -7,8 +7,8 @@
         <div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ route('home') }}">Home</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">New
+                <li class="dropdown dropdown-hover">
+                    <a id="unclickable" class="dropdown-toggle" data-toggle="dropdown" href="#">New
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{ route('transactions.create') }}">Transaction</a></li>
@@ -19,7 +19,7 @@
                     </ul>
                 </li>
                 @if(isset($nav_accounts))
-                    <li class="dropdown">
+                    <li class="dropdown dropdown-hover">
                         <a id="accounts" class="dropdown-toggle" data-toggle="dropdown" href="{{ route('accounts.index') }}">Accounts
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -36,7 +36,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if(Auth::check())
-                    <li class="dropdown">
+                    <li class="dropdown dropdown-hover">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> {{ $username }}
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu">

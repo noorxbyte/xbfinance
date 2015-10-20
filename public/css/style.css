@@ -36,13 +36,6 @@ td
 	text-align: left;
 }
 
-/* used in login form */
-.group span
-{
-    display: inline-block;
-    text-align: right;
-}
-
 /* center align container contents */
 .container
 {
