@@ -5,6 +5,11 @@
 @section('content')
 
 	@if(sizeof($transfers) > 0)
+		@include('_modal', [
+			'title' => 'Delete Transfer',
+			'message' => "Are you sure you want to delete the transfer? The transfer will be rolled back and balances reset."
+		])
+
 		<table class="table table-striped sortable">
 			<thead>
 				<th>Actions</th>
@@ -24,7 +29,7 @@
 								<span class="caret"></span></button>
 								<ul class="dropdown-menu">
 									<li><a href="{{ route('transfers.edit', $transfer['id']) }}">Edit</a></li>
-									<li><a href="{{ route('transfers.destroy', $transfer['id']) }}" class="btn_del">Delete</a></li>
+									<li><a href="{{ route('transfers.destroy', $transfer['id']) }}" class="btn-del">Delete</a></li>
 								</ul>
 							</div>
 						</td>
@@ -41,7 +46,6 @@
 		<br/>
 		{!! $transfers->render() !!}
 
-		@include('_delete_form', ['message' => 'Are you sure you want to delete the transfer? The transfer will be rolled back!'])
 	@else
 		<h4>You haven't made any transfers</h4>
 	@endif

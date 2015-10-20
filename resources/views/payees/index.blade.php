@@ -5,6 +5,11 @@
 @section('content')
 
 	@if(sizeof($payees) != 0)
+		@include('_modal', [
+			'title' => 'Delete Payee',
+			'message' => "Are you sure you want to delete the payee? All the transactions of the payee will be marked as NULL payee."
+		])
+
 		<table class="table table-bordered table-nonfluid sortable">
 			<thead>
 				<th>Actions</th>
@@ -22,7 +27,7 @@
 								<span class="caret"></span></button>
 								<ul class="dropdown-menu">
 									<li><a href="{{ route('payees.edit', $payee['id']) }}">Edit</a></li>
-									<li><a href="{{ route('payees.destroy', $payee['id']) }}" class="btn_del">Delete</a></li>
+									<li><a href="{{ route('payees.destroy', $payee['id']) }}" class="btn-del">Delete</a></li>
 								</ul>
 							</div>
 						</td>
@@ -40,8 +45,6 @@
 				</tr>
 			</tbody>
 		</table>
-
-		@include('_delete_form', ['message' => 'Are you sure you want to delete the payee?'])
 	@else
 		<h4>You don't have any payees.</h4>
 	@endif

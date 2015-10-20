@@ -26,18 +26,16 @@ $(document).ready(function() {
 	/*
 	 * Confirm delete and submit delete form
 	 */
-	$('.btn_del').click(function (event) {
+	$('.btn-del').click(function (event) {
+		// prevent follow link
 		event.preventDefault();
 
-		if (confirm($('#del_msg').val()) == true)
-		{
-			// update action
-			var url = $(this).attr('href');
-			$('#del_form').attr('action', url);
+		// update action of form
+		var action = $(this).attr('href');
+		$('#delForm').attr('action', action);
 
-			// submit form
-			$('#del_form').submit();
-		}
+		// show confirmation dialogue
+		$('#delConfirm').modal('show');
 	});
 
 	/*

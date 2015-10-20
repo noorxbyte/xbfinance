@@ -7,6 +7,11 @@
 
 	@if(sizeof($accounts) != 0)
 
+		@include('_modal', [
+			'title' => 'Delete Account',
+			'message' => "Are you sure you want to delete the account? All of the account's transactions will be deleted and will be unrecoverable."
+		])
+
 		<table class="table table-bordered table-nonfluid table-condensed sortable">
 			<thead>
 				<th>Actions</th>
@@ -23,7 +28,7 @@
 							<span class="caret"></span></button>
 							<ul class="dropdown-menu">
 								<li><a href="{{ route('accounts.edit', $account['id']) }}">Edit</a></li>
-								<li><a href="{{ route('accounts.destroy', $account['id']) }}" class="btn_del">Delete</a></li>
+								<li><a href="{{ route('accounts.destroy', $account['id']) }}" class="btn-del">Delete</a></li>
 							</ul>
 						</div>
 					</td>
@@ -35,7 +40,6 @@
 			</tbody>
 		</table>
 
-		@include('_delete_form', ['message' => 'Are you sure you want to delete the account? All the transactions of the account will be lost!'])
 	@else
 
 		<h4>You don't have any accounts</h4>

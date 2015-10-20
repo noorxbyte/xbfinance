@@ -5,6 +5,11 @@
 @section('content')
 
 	@if(sizeof($categories) != 0)
+		@include('_modal', [
+			'title' => 'Delete Category',
+			'message' => "Are you sure you want to delete the category? All the transactions with the category will be marked as uncategorized."
+		])
+
 		<table class="table table-bordered table-nonfluid sortable">
 			<thead>
 				<th>Actions</th>
@@ -22,7 +27,7 @@
 								<span class="caret"></span></button>
 								<ul class="dropdown-menu">
 									<li><a href="{{ route('categories.edit', $category['id']) }}">Edit</a></li>
-									<li><a href="{{ route('categories.destroy', $category['id']) }}" class="btn_del">Delete</a></li>
+									<li><a href="{{ route('categories.destroy', $category['id']) }}" class="btn-del">Delete</a></li>
 								</ul>
 							</div>
 						</td>
@@ -40,8 +45,6 @@
 				</tr>
 			</tbody>
 		</table>
-
-		@include('_delete_form', ['message' => 'Are you sure you want to delete the category?'])
 	@else
 		<h4>You don't have any categories.</h4>
 	@endif

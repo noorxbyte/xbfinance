@@ -5,6 +5,11 @@
 @section('content')
 
 	@if(sizeof($transactions) > 0)
+		@include('_modal', [
+			'title' => 'Delete Transaction',
+			'message' => "Are you sure you want to delete the transaction? The transaction will be rolled back and balances reset."
+		])
+
 		<table class="table table-striped sortable">
 			<thead>
 				<th>Actions</th>
@@ -26,7 +31,7 @@
 								<span class="caret"></span></button>
 								<ul class="dropdown-menu">
 									<li><a href="{{ route('transactions.edit', $transaction['id']) }}">Edit</a></li>
-									<li><a href="{{ route('transactions.destroy', $transaction['id']) }}" class="btn_del">Delete</a></li>
+									<li><a href="{{ route('transactions.destroy', $transaction['id']) }}" class="btn-del">Delete</a></li>
 								</ul>
 							</div>
 						</td>
@@ -44,8 +49,6 @@
 		</table>
 		<br/>
 		{!! $transactions->render() !!}
-
-		@include('_delete_form', ['message' => 'Are you sure you want to delete the transaction? It will be rolled back!'])
 	@else
 		<h4>{{ $emptyMsg or 'No transactions for this account' }}</h4>
 	@endif
