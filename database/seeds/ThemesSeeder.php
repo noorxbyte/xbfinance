@@ -15,9 +15,12 @@ class ThemesSeeder extends Seeder
         DB::table('themes')->delete();
  
         $themes = array(
+            ['name' => 'cosmo', 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['name' => 'cyborg', 'created_at' => new DateTime, 'updated_at' => new DateTime],
             ['name' => 'default', 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['name' => 'superhero', 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['name' => 'united', 'created_at' => new DateTime, 'updated_at' => new DateTime],
             ['name' => 'yeti', 'created_at' => new DateTime, 'updated_at' => new DateTime],
-            ['name' => 'slate', 'created_at' => new DateTime, 'updated_at' => new DateTime],
         );
  
         // Uncomment the below to run the seeder
