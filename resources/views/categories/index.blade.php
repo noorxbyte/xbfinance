@@ -14,6 +14,8 @@
 			<thead>
 				<th>Actions</th>
 				<th>Category</th>
+				<th>Income Total</th>
+				<th>Expense Total</th>
 				<th>Income %</th>
 				<th>Expense %</th>
 			</thead>
@@ -33,13 +35,17 @@
 						</td>
 
 						<td><a href="{{ route('categories.show', $category['id']) }}">{{ $category['name'] }}</a></td>
+						<td>${{ number_format($category->transactions->where('type', 'DEPOSIT')->sum('amount'), 2) }}</td>
+						<td>${{ number_format($category->transactions->where('type', 'WITHDRAWAL')->sum('amount'), 2) }}</td>
 						<td>{{ ($incomeTotal > 0) ? round(((($category->transactions->where('type', 'DEPOSIT')->sum('amount')) / $incomeTotal) * 100), 2) : 0 }}%</td>
 						<td>{{ ($expenseTotal > 0) ? round(((($category->transactions->where('type', 'WITHDRAWAL')->sum('amount')) / $expenseTotal) * 100), 2) : 0 }}%</td>
 					</tr>
 				@endforeach
 				<tr>
 					<td class="text-center">-</td>
-					<td><a href="{{ route('categories.show', 0) }}">N/A</a></td>
+					<td><a href="{{ route('categories.show', 0) }}">-- N/A --</a></td>
+					<td>${{ number_format($transactions->where('type', 'DEPOSIT')->sum('amount'), 2) }}</td>
+					<td>${{ number_format($transactions->where('type', 'WITHDRAWAL')->sum('amount'), 2) }}</td>
 					<td>{{ ($incomeTotal > 0) ? round(((($transactions->where('type', 'DEPOSIT')->sum('amount')) / $incomeTotal) * 100), 2) : 0 }}%</td>
 					<td>{{ ($expenseTotal > 0) ? round(((($transactions->where('type', 'WITHDRAWAL')->sum('amount')) / $expenseTotal) * 100), 2) : 0 }}%</td>
 				</tr>

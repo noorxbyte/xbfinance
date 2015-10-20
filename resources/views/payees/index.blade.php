@@ -14,6 +14,8 @@
 			<thead>
 				<th>Actions</th>
 				<th>Payee Name</th>
+				<th>Income Total</th>
+				<th>Expense Total</th>
 				<th>Income %</th>
 				<th>Expense %</th>
 			</thead>
@@ -33,13 +35,17 @@
 						</td>
 
 						<td><a href="{{ route('payees.show', $payee['id']) }}">{{ $payee['name'] }}</a></td>
+						<td>${{ number_format($payee->transactions->where('type', 'DEPOSIT')->sum('amount'), 2) }}</td>
+						<td>${{ number_format($payee->transactions->where('type', 'WITHDRAWAL')->sum('amount'), 2) }}</td>
 						<td>{{ ($incomeTotal > 0) ? round(((($payee->transactions->where('type', 'DEPOSIT')->sum('amount')) / $incomeTotal) * 100), 2) : 0 }}%</td>
 						<td>{{ ($expenseTotal > 0) ? round(((($payee->transactions->where('type', 'WITHDRAWAL')->sum('amount')) / $expenseTotal) * 100), 2) : 0 }}%</td>
 					</tr>
 				@endforeach
 				<tr>
 					<td class="text-center">-</td>
-					<td><a href="{{ route('payees.show', 0) }}">N/A</a></td>
+					<td><a href="{{ route('payees.show', 0) }}">-- N/A --</a></td>
+					<td>${{ number_format($transactions->where('type', 'DEPOSIT')->sum('amount'), 2) }}</td>
+					<td>${{ number_format($transactions->where('type', 'WITHDRAWAL')->sum('amount'), 2) }}</td>
 					<td>{{ ($incomeTotal > 0) ? round(((($transactions->where('type', 'DEPOSIT')->sum('amount')) / $incomeTotal) * 100), 2) : 0 }}%</td>
 					<td>{{ ($expenseTotal > 0) ? round(((($transactions->where('type', 'WITHDRAWAL')->sum('amount')) / $expenseTotal) * 100), 2) : 0 }}%</td>
 				</tr>
