@@ -54,7 +54,9 @@ $(document).ready(function() {
     	$('.nav-tabs a[href="#summary"]').tab('show');
     }
 
-    // dropdown on hover
+    /*
+     * Dropdown on hover
+     */
 	$(function() {
 		$('.dropdown').hover(function() {
 			$('ul.dropdown-menu', this).stop(true, true).slideDown('fast');
@@ -64,6 +66,13 @@ $(document).ready(function() {
 			$('ul.dropdown-menu', this).stop(true, true).slideUp('fast');
 			$(this).delay(200).removeClass('open');
 		});
+	});
+
+	/*
+	 * Follow link when account's clicked
+	 */
+	$('#accounts').click(function() {
+		window.location = $('#accounts').attr('href');
 	});
 
 });
