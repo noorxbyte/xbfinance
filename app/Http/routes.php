@@ -98,6 +98,22 @@ View::composer('master', function($view) {
 	}
 });
 
+// pass title and heading into login page
+View::composer('auth.login', function($view) {
+	$title = "Login";
+	$heading = "Login";
+
+	$view->with('title', $title)->with('heading', $heading);
+});
+
+// pass title and heading into register page
+View::composer('auth.register', function($view) {
+	$title = "Register";
+	$heading = "Register";
+
+	$view->with('title', $title)->with('heading', $heading);
+});
+
 // pass theme list and user info into theme change page
 View::composer('user._changeTheme', function($view) {
 	// get theme list
