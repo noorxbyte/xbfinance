@@ -35,8 +35,8 @@
 						</td>
 
 						<td>{{ (new \DateTime($transfer['date']))->format('d/m/Y') }}</td>
-						<td><a href="{{ route('accounts.show', $transfer['account_from']) }}">{{ $transfer->from->name or '-' }}</a></td>
-						<td><a href="{{ route('accounts.show', $transfer['account_to']) }}">{{ $transfer->to->name or '-' }}</a></td>
+						<td><a href="{{ route('accounts.show', $transfer['account_from']) }}">{{ $transfer->from->name or '-- N/A --' }}</a></td>
+						<td><a href="{{ route('accounts.show', $transfer['account_to']) }}">{{ $transfer->to->name or '-- N/A --' }}</a></td>
 						<td>${{ number_format($transfer['amount'], 2) }}</td>
 						<td>{{ $transfer['comment'] }}</td>
 					</tr>
