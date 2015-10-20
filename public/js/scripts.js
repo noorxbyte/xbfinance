@@ -54,4 +54,16 @@ $(document).ready(function() {
     	$('.nav-tabs a[href="#summary"]').tab('show');
     }
 
+    // dropdown on hover
+	$(function() {
+		$('.dropdown').hover(function() {
+			$('ul.dropdown-menu', this).stop(true, true).slideDown('fast');
+			$(this).delay(200).addClass('open');
+		},
+		function() {
+			$('ul.dropdown-menu', this).stop(true, true).slideUp('fast');
+			$(this).delay(200).removeClass('open');
+		});
+	});
+
 });

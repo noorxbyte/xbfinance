@@ -20,7 +20,7 @@
                 </li>
                 @if(isset($nav_accounts))
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Accounts
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="{{ route('accounts.index') }}">Accounts
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             @foreach($nav_accounts as $nav_account)
