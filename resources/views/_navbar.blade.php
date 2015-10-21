@@ -40,7 +40,7 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> {{ $username }}
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#"><span class="glyphicon glyphicon-check"></span> Validator</a></li>
+                            <li><a href="#" id="validateSubmit"><span class="glyphicon glyphicon-check"></span> Validator</a></li>
                             <li><a href="{{ route('user.settings') }}"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
                             <li><a href="{{ route('logout') }}"><span class="glyphicon glyphicon-log-out"></span> <strong>Logout</strong></a></li>
                         </ul>

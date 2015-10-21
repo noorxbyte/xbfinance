@@ -62,6 +62,9 @@
 
             <!-- main content of page goes here -->
             @yield('content')
+
+            <!-- validate form -->
+            @include('_validate')
         </div>
 
         <!-- footer -->

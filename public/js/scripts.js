@@ -73,4 +73,12 @@ $(document).ready(function() {
 		window.location = $('#accounts').attr('href');
 	});
 
+	/*
+	 * Submit validate form
+	 */
+	$('#validateSubmit').click(function(event) {
+		event.preventDefault();
+		$('#validateForm').submit();
+	});
+
 });

@@ -153,4 +153,47 @@ class UserController extends Controller
         // redirect back
         return redirect()->route('home');
     }
+
+    /**
+     * Validate user's account balances
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function validateBalances()
+    {
+        // get a list of all user account's
+        $accounts = User::find(Auth::user()->id)->accounts->all();
+
+        foreach($accounts as $account)
+            $account->push(['cbalance' => 0]);
+
+        // calculate the balance of each account
+        foreach($accounts as $account)
+        {
+            $account->cbalance += User::find(Auth::user()->id)->accounts->find($account->id)->transactions->where('type', 'DEPOSIT')->sum('amount');
+            $account->cbalance -= User::find(Auth::user()->id)->accounts->find($account->id)->transactions->where('type', 'WITHDRAWAL')->sum('amount');
+
+            $account->cbalance -= User::find(Auth::user()->id)->transfers->where('account_from', $account->id)->sum('amount');
+            $account->cbalance += User::find(Auth::user()->id)->transfers->where('account_to', $account->id)->sum('amount');
+        }
+
+        // check if all balances are valid
+        $message = "All accounts balances are valid.";
+        $news = true;
+        foreach($accounts as $account)
+        {
+            if ($account->balance != $account->cbalance)
+            {
+                $message = "Sorry! The Math doesn't add up.";
+                $news = false;
+                break;
+            }
+        }
+
+        // stuff to pass into view
+        $title = "Validate";
+        $heading = "Validate Account Balances";
+
+        return view('user.validate', compact('accounts', 'message', 'news', 'title', 'heading'));
+    }
 }
