@@ -16,6 +16,12 @@ class DatabaseSeeder extends Seeder
 
         $this->call('ThemesSeeder');
         $this->call('UserSeeder');
+        $this->call('AccountSeeder');
+        $this->call('CategorySeeder');
+        $this->call('PayeeSeeder');
+        $this->call('TransactionSeeder');
+        $this->call('TransferSeeder');
+        $this->call('AccountBalance');
 
         Model::reguard();
     }

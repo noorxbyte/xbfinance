@@ -15,8 +15,8 @@ class UserSeeder extends Seeder
         DB::table('users')->delete();
  
         $users = array(
-            ['name' => 'Hussain Noor Mohamed', 'email' => 'noor.xbyte@gmail.com', 'password' => bcrypt('123456'), 'created_at' => new DateTime, 'updated_at' => new DateTime],
-            ['name' => 'Demo User', 'email' => 'demo@user.com', 'password' => bcrypt('123456'), 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 1, 'name' => 'Hussain Noor Mohamed', 'email' => 'noor.xbyte@gmail.com', 'password' => bcrypt('123456'), 'created_at' => new DateTime, 'updated_at' => new DateTime],
+            ['id' => 2, 'name' => 'Demo User', 'email' => 'demo@user.com', 'password' => bcrypt('123456'), 'created_at' => new DateTime, 'updated_at' => new DateTime],
         );
  
         // Uncomment the below to run the seeder
