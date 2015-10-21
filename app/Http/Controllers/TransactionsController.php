@@ -21,7 +21,7 @@ class TransactionsController extends Controller
     public function index()
     {
         // get user's transactions
-        $transactions = Transaction::where('user_id', Auth::user()->id)->paginate(25);
+        $transactions = Transaction::where('user_id', Auth::user()->id)->orderBy('date', 'desc')->paginate(25);
 
         // stuff to pass into view
         $title = "All Transactions";
