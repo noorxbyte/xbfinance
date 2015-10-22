@@ -11,8 +11,8 @@
 	<div class="text-center">
 		<ul class="nav nav-tabs">
 			<li><a data-toggle="tab" href="#summary">Summary</a></li>
-			<li><a data-toggle="tab" href="#changeName">Change Name</a></li>
-			<li><a data-toggle="tab" href="#changePass">Change Password</a></li>
+			<li><a data-toggle="tab" href="#changeNameEmail">Email/Name</a></li>
+			<li><a data-toggle="tab" href="#changePass">Password</a></li>
 			<li><a data-toggle="tab" href="#changeTheme">Theme</a></li>
 			<li><a data-toggle="tab" href="#delAcc">Delete My Account</a></li>
 		</ul>
@@ -27,7 +27,7 @@
 			</div>
 		</div>
 
-		<div id="changeName" class="tab-pane fade">
+		<div id="changeNameEmail" class="tab-pane fade">
 			<br/><br/>
 			<div class="text-center">
 				@include('user._changeName')

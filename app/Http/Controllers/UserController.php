@@ -67,7 +67,7 @@ class UserController extends Controller
     public function changeName(Request $request)
     {
         // validate submission
-        if (!isset($request->name) || empty($request->name))
+        if (!isset($request->name) || empty($request->name) || !isset($request->email) || empty($request->email) || !filter_var($request->email, FILTER_VALIDATE_EMAIL))
         {
             // stuff to pass into view
             $title = "Error";
@@ -76,16 +76,17 @@ class UserController extends Controller
             return view('errors.error', compact('errmsg', 'title', 'heading'));
         }
 
-        // change user's name
+        // change user's name and email
         $user = User::find(Auth::user()->id);
         $user->name = $request->name;
+        $user->email = $request->email;
         $user->save();
 
         // flash message
-        session()->flash('flash_message', 'Name changed successfully.');
+        session()->flash('flash_message', 'Name and Email updated successfully.');
 
         // redirect back
-        return redirect()->back()->with('active_id', '#changeName');
+        return redirect()->back()->with('active_id', '#changeNameEmail');
     }
 
     /**
