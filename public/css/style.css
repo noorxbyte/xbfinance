@@ -3,10 +3,16 @@
  */
 
 /* display hand on thead hover */
-th
+.sortable th
 {
     cursor: pointer;
     cursor: hand;
+}
+
+/* Make pagination links visible */
+.pager
+{
+    font-size: 250%;
 }
 
 /* center nav pills and tabs */

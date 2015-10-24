@@ -10,7 +10,21 @@
 			'message' => "Are you sure you want to delete the transaction? The transaction will be rolled back and balances reset."
 		])
 
-		<table class="table table-striped sortable">
+		{!! Form::open(['action' => 'TransactionsController@index', 'method' => 'GET', 'class' => 'form-inline']) !!}
+			<div class="form-group">
+				{!! Form::select('sort', ['date' => 'Date', 'amount' => 'Amount'], null, ['class' => 'form-control input-sm']) !!}
+			</div>
+			<div class="form-group">
+				{!! Form::select('order', ['DESC' => 'Descending', 'ASC' => 'Ascending'], null, ['class' => 'form-control input-sm']) !!}
+			</div>
+			<div class="form-group">
+				{!! Form::button('Sort', ['type' => 'submit', 'class' => 'btn btn-default input-sm'], 'Sort') !!}
+			</div>
+		{!! Form::close() !!}
+
+		<br/>
+
+		<table class="table table-striped">
 			<thead>
 				<th>Actions</th>
 				<th>Date</th>
@@ -47,8 +61,7 @@
 				@endforeach
 			</tbody>
 		</table>
-		<br/>
-		{!! $transactions->render() !!}
+		{!! $transactions->appends(['sort' => old('sort'), 'order' => old('order')])->render() !!}
 	@else
 		<h4>{{ $emptyMsg or 'No transactions for this account' }}</h4>
 	@endif

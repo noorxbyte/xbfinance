@@ -78,10 +78,10 @@ class AccountsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int  $return
+     * @id \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         // check if the account exists
         $account = User::find(Auth::user()->id)->accounts->find($id);
@@ -95,11 +95,19 @@ class AccountsController extends Controller
         }
 
         // get the account's transactions
-        $transactions = $account->transactions()->orderBy('date', 'desc')->paginate(25);
+        $transactions = $account->transactions();
+
+        // sort
+        if (!empty($request->sort))
+            $transactions = $transactions->orderBy($request->sort, $request->order)->simplePaginate(25);
+        else
+            $transactions = $transactions->orderBy('date', 'desc')->simplePaginate(25);
 
         // stuff to pass into view
         $title = "Transactions";
         $heading = $account['name'] . " - Transactions";
+
+        $request->flash();
 
         return view('accounts.show', compact('transactions', 'heading', 'title'));
     }

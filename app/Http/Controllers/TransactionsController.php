@@ -18,14 +18,22 @@ class TransactionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // get user's transactions
-        $transactions = Transaction::where('user_id', Auth::user()->id)->orderBy('date', 'desc')->paginate(25);
+        $transactions = Transaction::where('user_id', Auth::user()->id);
+
+        // sort
+        if (!empty($request->sort))
+            $transactions = $transactions->orderBy($request->sort, $request->order)->simplePaginate(25);
+        else
+            $transactions = $transactions->orderBy('date', 'desc')->simplePaginate(25);
 
         // stuff to pass into view
         $title = "All Transactions";
         $heading = "All Transactions";
+
+        $request->flash();
 
         return view('transactions.index', compact('transactions', 'title', 'heading'));
     }

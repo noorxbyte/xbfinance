@@ -18,14 +18,22 @@ class TransfersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // get a list of all transfers
-        $transfers = Transfer::where('user_id', Auth::user()->id)->paginate(25);
+        $transfers = Transfer::where('user_id', Auth::user()->id);
+
+        // sort
+        if (!empty($request->sort))
+            $transfers = $transfers->orderBy($request->sort, $request->order)->simplePaginate(25);
+        else
+            $transfers = $transfers->orderBy('date', 'desc')->simplePaginate(25);
 
         // stuff to pass into view
         $title = "Transfers";
         $heading = "Transfers";
+
+        $request->flash();
         
         return view('transfers.index', compact('transfers', 'title', 'heading'));
     }
