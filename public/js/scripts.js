@@ -84,6 +84,7 @@ $(document).ready(function() {
 	/*
 	 * Highlight search results
 	 */
-	// TODO
+	if ($('#search').val().length > 0)
+		$('table').html($('table').html().replace(new RegExp($('#search').val(), "ig"), '<span class="highlight">' + $('#search').val() + '</span>'));
 
 });
