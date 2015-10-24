@@ -18,7 +18,7 @@ class TransferSeeder extends Seeder
 		$faker = Faker\Factory::create();
         $transfers = [];
 
-        for($i = 1; $i <= 20; $i++)
+        for($i = 1; $i <= 50; $i++)
         {
             $num1 = rand(1, 3);
             $num2 = rand(1, 3);
@@ -35,7 +35,7 @@ class TransferSeeder extends Seeder
         		'date' => $faker->date($format = 'Y-m-d', $max = 'now'),
         		'account_from' => $num1,
         		'account_to' => $num2,
-        		'amount' => rand(10, 500),
+        		'amount' => rand(1, 100),
         		'comment' => $faker->sentence($nbWords = 10)
         	]);
         }
