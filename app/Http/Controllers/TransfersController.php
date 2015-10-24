@@ -30,12 +30,13 @@ class TransfersController extends Controller
             $transfers = $transfers->orderBy('date', 'desc')->simplePaginate(25);
 
         // stuff to pass into view
+        $action = 'TransfersController@index';
         $title = "Transfers";
         $heading = "Transfers";
 
         $request->flash();
         
-        return view('transfers.index', compact('transfers', 'title', 'heading'));
+        return view('transfers.index', compact('transfers', 'action', 'title', 'heading'));
     }
 
     /**
@@ -325,5 +326,31 @@ class TransfersController extends Controller
 
         // redirect to transfers
         return redirect()->route('transfers.index');
+    }
+
+    /**
+     * Display search results
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        // get a list of all transfers
+        $transfers = Transfer::where('user_id', Auth::user()->id)->where('comment', 'LIKE', '%' . $request->q . '%');
+
+        // sort
+        if (!empty($request->sort))
+            $transfers = $transfers->orderBy($request->sort, $request->order)->simplePaginate(25);
+        else
+            $transfers = $transfers->orderBy('date', 'desc')->simplePaginate(25);
+
+        // stuff to pass into view
+        $action = 'TransfersController@search';
+        $title = "Search Transfers";
+        $heading = "Search Transfers - '" . $request->q ."'";
+
+        $request->flash();
+        
+        return view('transfers.index', compact('transfers', 'action', 'title', 'heading'));
     }
 }

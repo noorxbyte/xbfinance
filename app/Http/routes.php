@@ -39,6 +39,9 @@ Route::group(['middleware' => 'auth'], function()
 	// payees routes
 	Route::resource('payees', 'PayeesController');
 
+	// search transactions
+	Route::get('transfers/search', ['as' => 'transfers.search', 'uses' => 'TransfersController@search']);
+
 	// user settings main page
 	Route::get('user/settings', ['as' => 'user.settings', 'uses' => 'UserController@index']);
 
