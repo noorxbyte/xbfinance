@@ -19,7 +19,7 @@
 					</div>
 					<div class="form-group">
 						{!! Form::select('order', ['DESC' => 'Descending', 'ASC' => 'Ascending'], null, ['class' => 'form-control input-sm']) !!}
-						{!! Form::input('hidden', 'q', null, ['class' => 'form-control input-sm', 'placeholder' => 'Search Transfers']) !!}
+						{!! Form::input('hidden', 'q', null) !!}
 					</div>
 					<div class="form-group">
 						{!! Form::button('Sort', ['type' => 'submit', 'class' => 'btn btn-default input-sm'], 'Sort') !!}
@@ -80,7 +80,7 @@
 		{!! $transfers->appends(['sort' => old('sort'), 'order' => old('order')])->render() !!}
 
 	@else
-		<h4>You haven't made any transfers</h4>
+		<h4>{{ $emptyMsg or "You haven't made any transfers" }}</h4>
 	@endif
 
 @stop

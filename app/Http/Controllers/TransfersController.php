@@ -346,11 +346,12 @@ class TransfersController extends Controller
 
         // stuff to pass into view
         $action = 'TransfersController@search';
+        $emptyMsg = "No Results for '" . $request->q . "'";
         $title = "Search Transfers";
         $heading = "Search Transfers - '" . $request->q ."'";
 
         $request->flash();
         
-        return view('transfers.index', compact('transfers', 'action', 'title', 'heading'));
+        return view('transfers.index', compact('transfers', 'action', 'emptyMsg', 'title', 'heading'));
     }
 }
