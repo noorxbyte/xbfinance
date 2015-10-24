@@ -60,6 +60,7 @@
 			</tbody>
 		</table>
 		{!! $transactions->appends(['sort' => old('sort'), 'order' => old('order')])->render() !!}
+		<div class="text-center"><b>Page {{ $transactions->currentPage() }} of {{ Session::get('total_count') }}</b></div><br/>
 
 	@else
 		<h4>No transactions for this account</h4>

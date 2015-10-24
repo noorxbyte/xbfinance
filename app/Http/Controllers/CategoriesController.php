@@ -87,7 +87,7 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
         if ($id == 0)
         {
@@ -113,15 +113,25 @@ class CategoriesController extends Controller
             }
 
             // get the transactions of the category
-            $transactions = Category::find($id)->transactions()->paginate(25);
+            $transactions = Category::find($id)->transactions();
+
+            // remember total records
+            session()->flash('total_count', ceil($transactions->count() / 25));
+
+            // sort
+            if (!empty($request->sort))
+                $transactions = $transactions->orderBy($request->sort, $request->order)->simplePaginate(25);
+            else
+                $transactions = $transactions->orderBy('date', 'desc')->simplePaginate(25);
 
             // stuff to pass into view
+            $action = ["CategoriesController@show", $id];
             $emptyMsg = "No transactions for this category.";
             $title = "Category Specific Transaction List";
             $heading = "Category: " . Category::find($id)->name;
         }
 
-        return view('transactions.index', compact('transactions', 'emptyMsg', 'title', 'heading'));
+        return view('transactions.index', compact('transactions', 'action', 'emptyMsg', 'title', 'heading'));
     }
 
     /**

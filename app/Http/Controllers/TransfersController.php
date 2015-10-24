@@ -23,6 +23,9 @@ class TransfersController extends Controller
         // get a list of all transfers
         $transfers = Transfer::where('user_id', Auth::user()->id);
 
+        // remember total records
+        session()->flash('total_count', ceil($transfers->count() / 25));
+
         // sort
         if (!empty($request->sort))
             $transfers = $transfers->orderBy($request->sort, $request->order)->simplePaginate(25);
@@ -337,6 +340,9 @@ class TransfersController extends Controller
     {
         // get a list of all transfers
         $transfers = Transfer::where('user_id', Auth::user()->id)->where('comment', 'LIKE', '%' . $request->q . '%');
+
+        // remember total records
+        session()->flash('total_count', ceil($transfers->count() / 25));
 
         // sort
         if (!empty($request->sort))

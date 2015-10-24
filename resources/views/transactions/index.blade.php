@@ -79,7 +79,9 @@
 				@endforeach
 			</tbody>
 		</table>
+		<!-- pager -->
 		{!! $transactions->appends(['q' => old('q'), 'sort' => old('sort'), 'order' => old('order')])->render() !!}
+		<div class="text-center"><b>Page {{ $transactions->currentPage() }} of {{ Session::get('total_count') }}</b></div><br/>
 	@else
 		<h4>{{ $emptyMsg or 'No transactions for this account' }}</h4>
 	@endif

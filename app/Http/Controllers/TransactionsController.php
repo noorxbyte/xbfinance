@@ -23,6 +23,9 @@ class TransactionsController extends Controller
         // get user's transactions
         $transactions = Transaction::where('user_id', Auth::user()->id);
 
+        // remember total records
+        session()->flash('total_count', ceil($transactions->count() / 25));
+
         // sort
         if (!empty($request->sort))
             $transactions = $transactions->orderBy($request->sort, $request->order)->simplePaginate(25);
@@ -405,6 +408,9 @@ class TransactionsController extends Controller
     {
         // get a list of all transactions
         $transactions = Transaction::where('user_id', Auth::user()->id)->where('comment', 'LIKE', '%' . $request->q . '%');
+
+        // remember total records
+        session()->flash('total_count', ceil($transactions->count() / 25));
 
         // sort
         if (!empty($request->sort))

@@ -78,6 +78,7 @@
 
 		<!-- pager -->
 		{!! $transfers->appends(['q' => old('q'), 'sort' => old('sort'), 'order' => old('order')])->render() !!}
+		<div class="text-center"><b>Page {{ $transfers->currentPage() }} of {{ Session::get('total_count') }}</b></div><br/>
 
 	@else
 		<h4>{{ $emptyMsg or "You haven't made any transfers" }}</h4>

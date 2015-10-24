@@ -97,6 +97,9 @@ class AccountsController extends Controller
         // get the account's transactions
         $transactions = $account->transactions();
 
+        // remember total records
+        session()->flash('total_count', ceil($transactions->count() / 25));
+
         // sort
         if (!empty($request->sort))
             $transactions = $transactions->orderBy($request->sort, $request->order)->simplePaginate(25);
