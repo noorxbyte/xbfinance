@@ -77,7 +77,7 @@
 		</table>
 
 		<!-- pager -->
-		{!! $transfers->appends(['sort' => old('sort'), 'order' => old('order')])->render() !!}
+		{!! $transfers->appends(['q' => old('q'), 'sort' => old('sort'), 'order' => old('order')])->render() !!}
 
 	@else
 		<h4>{{ $emptyMsg or "You haven't made any transfers" }}</h4>

@@ -30,12 +30,13 @@ class TransactionsController extends Controller
             $transactions = $transactions->orderBy('date', 'desc')->simplePaginate(25);
 
         // stuff to pass into view
+        $action = "TransactionsController@index";
         $title = "All Transactions";
         $heading = "All Transactions";
 
         $request->flash();
 
-        return view('transactions.index', compact('transactions', 'title', 'heading'));
+        return view('transactions.index', compact('transactions', 'action', 'title', 'heading'));
     }
 
     /**
@@ -393,5 +394,32 @@ class TransactionsController extends Controller
 
         // redirect to transactions
         return redirect()->route('transactions.index');
+    }
+
+    /**
+     * Display search results
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        // get a list of all transactions
+        $transactions = Transaction::where('user_id', Auth::user()->id)->where('comment', 'LIKE', '%' . $request->q . '%');
+
+        // sort
+        if (!empty($request->sort))
+            $transactions = $transactions->orderBy($request->sort, $request->order)->simplePaginate(25);
+        else
+            $transactions = $transactions->orderBy('date', 'desc')->simplePaginate(25);
+
+        // stuff to pass into view
+        $action = 'TransactionsController@search';
+        $emptyMsg = "No Results for '" . $request->q . "'";
+        $title = "Search Transactions";
+        $heading = "Search Transactions - '" . $request->q ."'";
+
+        $request->flash();
+        
+        return view('transactions.index', compact('transactions', 'action', 'emptyMsg', 'title', 'heading'));
     }
 }

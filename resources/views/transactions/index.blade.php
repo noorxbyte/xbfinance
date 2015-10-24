@@ -10,19 +10,37 @@
 			'message' => "Are you sure you want to delete the transaction? The transaction will be rolled back and balances reset."
 		])
 
-		{!! Form::open(['action' => 'TransactionsController@index', 'method' => 'GET', 'class' => 'form-inline']) !!}
-			<div class="form-group">
-				{!! Form::select('sort', ['date' => 'Date', 'amount' => 'Amount'], null, ['class' => 'form-control input-sm']) !!}
+		<div class="row-fluid">
+			<!-- Sort Form -->
+			<div class="col-sm-6">
+				{!! Form::open(['action' => $action, 'method' => 'GET', 'class' => 'form-inline']) !!}
+					<div class="form-group">
+						{!! Form::select('sort', ['date' => 'Date', 'amount' => 'Amount'], null, ['class' => 'form-control input-sm']) !!}
+					</div>
+					<div class="form-group">
+						{!! Form::select('order', ['DESC' => 'Descending', 'ASC' => 'Ascending'], null, ['class' => 'form-control input-sm']) !!}
+						{!! Form::input('hidden', 'q', null) !!}
+					</div>
+					<div class="form-group">
+						{!! Form::button('Sort', ['type' => 'submit', 'class' => 'btn btn-default input-sm'], 'Sort') !!}
+					</div>
+				{!! Form::close() !!}
 			</div>
-			<div class="form-group">
-				{!! Form::select('order', ['DESC' => 'Descending', 'ASC' => 'Ascending'], null, ['class' => 'form-control input-sm']) !!}
-			</div>
-			<div class="form-group">
-				{!! Form::button('Sort', ['type' => 'submit', 'class' => 'btn btn-default input-sm'], 'Sort') !!}
-			</div>
-		{!! Form::close() !!}
 
-		<br/>
+			<!-- Search Form -->
+			<div class="col-sm-6">
+				{!! Form::open(['action' => 'TransactionsController@search', 'method' => 'GET', 'class' => 'form-inline pull-right']) !!}
+					<div class="form-group">
+						{!! Form::input('search', 'q', null, ['class' => 'form-control input-sm', 'placeholder' => 'Search Transactions']) !!}
+					</div>
+					<div class="form-group">
+						{!! Form::button('Search', ['type' => 'submit', 'class' => 'btn btn-default input-sm'], 'Sort') !!}
+					</div>
+				{!! Form::close() !!}
+			</div>
+		</div>
+
+		<br/><br/><br/>
 
 		<table class="table table-striped">
 			<thead>
@@ -61,7 +79,7 @@
 				@endforeach
 			</tbody>
 		</table>
-		{!! $transactions->appends(['sort' => old('sort'), 'order' => old('order')])->render() !!}
+		{!! $transactions->appends(['q' => old('q'), 'sort' => old('sort'), 'order' => old('order')])->render() !!}
 	@else
 		<h4>{{ $emptyMsg or 'No transactions for this account' }}</h4>
 	@endif

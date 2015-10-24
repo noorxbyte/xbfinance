@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth'], function()
 	Route::resource('accounts', 'AccountsController');
 
 	// transactions routes
-	Route::resource('transactions', 'TransactionsController');
+	Route::resource('transactions', 'TransactionsController', ['except' => ['show']]);
 
 	// transfers routes
 	Route::resource('transfers', 'TransfersController', ['except' => ['show']]);
@@ -40,6 +40,9 @@ Route::group(['middleware' => 'auth'], function()
 	Route::resource('payees', 'PayeesController');
 
 	// search transactions
+	Route::get('transactions/search', ['as' => 'transactions.search', 'uses' => 'TransactionsController@search']);
+
+	// search transfers
 	Route::get('transfers/search', ['as' => 'transfers.search', 'uses' => 'TransfersController@search']);
 
 	// user settings main page
