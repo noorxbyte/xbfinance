@@ -20,8 +20,19 @@ class TransactionsController extends Controller
      */
     public function index(Request $request)
     {
+        // validate request
+        $this->validate($request, [
+            'sort' => 'in:date,amount',
+            'order' => 'in:DESC,ASC',
+            'type' => 'in:WITHDRAWAL,DEPOSIT'
+        ]);
+
         // get user's transactions
         $transactions = Transaction::where('user_id', Auth::user()->id);
+
+        // filter
+        if (!empty($request->type))
+            $transactions = $transactions->where('type', $request->type);
 
         // remember total records
         session()->flash('total_count', ceil($transactions->count() / 25));
@@ -406,8 +417,19 @@ class TransactionsController extends Controller
      */
     public function search(Request $request)
     {
+        // validate request
+        $this->validate($request, [
+            'sort' => 'in:date,amount',
+            'order' => 'in:DESC,ASC',
+            'type' => 'in:WITHDRAWAL,DEPOSIT'
+        ]);
+
         // get a list of all transactions
         $transactions = Transaction::where('user_id', Auth::user()->id)->where('comment', 'LIKE', '%' . $request->q . '%');
+
+        // filter
+        if (!empty($request->type))
+            $transactions = $transactions->where('type', $request->type);
 
         // remember total records
         session()->flash('total_count', ceil($transactions->count() / 25));

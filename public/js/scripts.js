@@ -81,4 +81,9 @@ $(document).ready(function() {
 		$('#validateForm').submit();
 	});
 
+	/*
+	 * Highlight search results
+	 */
+	// TODO
+
 });

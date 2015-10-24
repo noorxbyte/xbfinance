@@ -10,19 +10,54 @@
 			'message' => 'Are you sure you want to delete the transaction? The transaction will be rolled back and balances reset.'
 		])
 
-		{!! Form::open(['route' => ['accounts.show', $transactions[0]->account_id], 'method' => 'GET', 'class' => 'form-inline']) !!}
-			<div class="form-group">
-				{!! Form::select('sort', ['date' => 'Date', 'amount' => 'Amount'], null, ['class' => 'form-control input-sm']) !!}
-			</div>
-			<div class="form-group">
-				{!! Form::select('order', ['DESC' => 'Descending', 'ASC' => 'Ascending'], null, ['class' => 'form-control input-sm']) !!}
-			</div>
-			<div class="form-group">
-				{!! Form::button('Sort', ['type' => 'submit', 'class' => 'btn btn-default input-sm'], 'Sort') !!}
-			</div>
-		{!! Form::close() !!}
+		@if (count($errors) > 0)
+		    <div class="alert alert-danger">
+		        <ul>
+		            @foreach ($errors->all() as $error)
+		                <li>{{ $error }}</li>
+		            @endforeach
+		        </ul>
+		    </div>
+		@endif
 
-		<br/>
+		<div class="row-fluid">
+			<!-- Sort Form -->
+			<div class="col-sm-6">
+				{!! Form::open(['route' => ['accounts.show', $transactions[0]->account_id], 'method' => 'GET', 'class' => 'form-inline']) !!}
+					<div class="form-group">
+						{!! Form::select('sort', ['date' => 'Date', 'amount' => 'Amount'], null, ['class' => 'form-control input-sm']) !!}
+					</div>
+					<div class="form-group">
+						{!! Form::select('order', ['DESC' => 'Descending', 'ASC' => 'Ascending'], null, ['class' => 'form-control input-sm']) !!}
+					</div>
+					<div class="form-group">
+						{!! Form::button('Sort', ['type' => 'submit', 'class' => 'btn btn-default input-sm'], 'Sort') !!}
+					</div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<div class="form-group">
+						<label for="type" class="form-label">Type: </label>
+						{!! Form::select('type', ['' => 'All', 'DEPOSIT' => 'Deposit', 'WITHDRAWAL' => 'Withdrawal'], null, ['class' => 'form-control input-sm']) !!}
+					</div>
+					<div class="form-group">
+						{!! Form::button('Filter', ['type' => 'submit', 'class' => 'btn btn-default input-sm'], 'Sort') !!}
+					</div>
+				{!! Form::close() !!}
+			</div>
+
+			<!-- Search Form -->
+			<div class="col-sm-6">
+				{!! Form::open(['action' => ['AccountsController@search', $transactions[0]->account_id], 'method' => 'GET', 'class' => 'form-inline pull-right']) !!}
+					<div class="form-group">
+						{!! Form::input('search', 'q', null, ['id' => 'search', 'class' => 'form-control input-sm', 'placeholder' => 'Search Account']) !!}
+					</div>
+					<div class="form-group">
+						{!! Form::button('Search', ['type' => 'submit', 'class' => 'btn btn-default input-sm'], 'Sort') !!}
+					</div>
+				{!! Form::close() !!}
+			</div>
+		</div>
+
+		<br/><br/><br/>
 
 		<table class="table table-striped">
 			<thead>

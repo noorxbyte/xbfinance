@@ -31,7 +31,7 @@
 			<div class="col-sm-6">
 				{!! Form::open(['action' => 'TransfersController@search', 'method' => 'GET', 'class' => 'form-inline pull-right']) !!}
 					<div class="form-group">
-						{!! Form::input('search', 'q', null, ['class' => 'form-control input-sm', 'placeholder' => 'Search Transfers']) !!}
+						{!! Form::input('search', 'q', null, ['id' => 'search', 'class' => 'form-control input-sm', 'placeholder' => 'Search Transfers']) !!}
 					</div>
 					<div class="form-group">
 						{!! Form::button('Search', ['type' => 'submit', 'class' => 'btn btn-default input-sm'], 'Sort') !!}

@@ -14,8 +14,6 @@
     <script src="/js/jquery-ui.js"></script>
     <link rel="stylesheet" href="/css/jquery-ui.css">
 
-    <!-- jQuery date picker -->
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="/css/bootstrap.css">
 
@@ -30,6 +28,9 @@
 
     <!-- Table sort script -->
     <script src="/js/sorttable.js"></script>
+
+    <!-- Search highlight script -->
+    <script src=""></script>
 
     <!-- Custom scripts -->
     <script src="/js/scripts.js"></script>

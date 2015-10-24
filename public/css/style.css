@@ -2,6 +2,12 @@
  * Global custom CSS
  */
 
+/* Highlight search query */
+.highlight
+{
+    background-color: yellow;
+}
+
 /* display hand on thead hover */
 .sortable th
 {

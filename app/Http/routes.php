@@ -42,6 +42,9 @@ Route::group(['middleware' => 'auth'], function()
 	// search transactions
 	Route::get('transactions/search', ['as' => 'transactions.search', 'uses' => 'TransactionsController@search']);
 
+	// search transactions of account
+	Route::get('account/{id}/search', ['as' => 'accounts.show.search', 'uses' => 'AccountsController@search']);
+
 	// search transfers
 	Route::get('transfers/search', ['as' => 'transfers.search', 'uses' => 'TransfersController@search']);
 

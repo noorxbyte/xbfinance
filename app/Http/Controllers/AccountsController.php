@@ -94,8 +94,19 @@ class AccountsController extends Controller
             return view('errors.error', compact('errmsg', 'title', 'heading'));
         }
 
+        // validate request
+        $this->validate($request, [
+            'sort' => 'in:date,amount',
+            'order' => 'in:DESC,ASC',
+            'type' => 'in:WITHDRAWAL,DEPOSIT'
+        ]);
+
         // get the account's transactions
         $transactions = $account->transactions();
+
+        // filter
+        if (!empty($request->type))
+            $transactions = $transactions->where('type', $request->type);
 
         // remember total records
         session()->flash('total_count', ceil($transactions->count() / 25));
@@ -211,5 +222,57 @@ class AccountsController extends Controller
 
         // redirect to accounts
         return redirect()->route('accounts.index');
+    }
+
+    /**
+     * Display search results
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search($id, Request $request)
+    {
+        // check if the account exists
+        $account = User::find(Auth::user()->id)->accounts->find($id);
+        if ($account === null)
+        {
+            // stuff to pass into view
+            $title = "Error";
+            $errmsg = "The account does not exist.";
+
+            return view('errors.error', compact('errmsg', 'title', 'heading'));
+        }
+
+        // validate request
+        $this->validate($request, [
+            'sort' => 'in:date,amount',
+            'order' => 'in:DESC,ASC',
+            'type' => 'in:WITHDRAWAL,DEPOSIT'
+        ]);
+
+        // get a list of all transactions
+        $transactions = $account->transactions()->where('comment', 'LIKE', '%' . $request->q . '%');
+
+        // filter
+        if (!empty($request->type))
+            $transactions = $transactions->where('type', $request->type);
+
+        // remember total records
+        session()->flash('total_count', ceil($transactions->count() / 25));
+
+        // sort
+        if (!empty($request->sort))
+            $transactions = $transactions->orderBy($request->sort, $request->order)->simplePaginate(25);
+        else
+            $transactions = $transactions->orderBy('date', 'desc')->simplePaginate(25);
+
+        // stuff to pass into view
+        $action = ['AccountsController@search', $id];
+        $emptyMsg = "No Results for '" . $request->q . "'";
+        $title = "Search Transactions";
+        $heading = "Search Transactions - '" . $request->q ."'";
+
+        $request->flash();
+        
+        return view('transactions.index', compact('transactions', 'action', 'emptyMsg', 'title', 'heading'));
     }
 }
