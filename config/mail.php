@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'contact@xbfinance.com', 'name' => 'XByte Finance'],
+    'from' => ['address' => env('MAIL_USERNAME'), 'name' => 'XByte Finance'],
 
     /*
     |--------------------------------------------------------------------------

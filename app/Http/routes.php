@@ -126,6 +126,22 @@ View::composer('auth.register', function($view) {
 	$view->with('title', $title)->with('heading', $heading);
 });
 
+// pass title and heading into forgot password page
+View::composer('auth.password', function($view) {
+	$title = "Forgot Password";
+	$heading = "Forgot Password";
+
+	$view->with('title', $title)->with('heading', $heading);
+});
+
+// pass title and heading into reset password page
+View::composer('auth.reset', function($view) {
+	$title = "Reset Password";
+	$heading = "Reset Password";
+
+	$view->with('title', $title)->with('heading', $heading);
+});
+
 // pass theme list and user info into theme change page
 View::composer('user._changeTheme', function($view) {
 	// get theme list
