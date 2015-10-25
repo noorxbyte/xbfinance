@@ -92,12 +92,20 @@ class CategoriesController extends Controller
         if ($id == 0)
         {
             // get uncategorized transactions
-            $transactions = Transaction::where('user_id', Auth::user()->id)->whereNull('category_id')->paginate(25);
-        
-            // stuff to pass into view
-            $emptyMsg = "No uncategorized transactions.";
-            $title = "Uncategorized Transactions";
-            $heading = "Uncategorized Transactions";
+            $transactions = User::find(Auth::user()->id)->transactions()->whereNull('category_id');
+
+            // filter
+            if (!empty($request->type))
+                $transactions = $transactions->where('type', $request->type);
+
+            // remember total records
+            session()->flash('total_count', ceil($transactions->count() / 25));
+
+            // sort
+            if (!empty($request->sort))
+                $transactions = $transactions->orderBy($request->sort, $request->order)->simplePaginate(25);
+            else
+                $transactions = $transactions->orderBy('date', 'desc')->simplePaginate(25);
         }
         else
         {
@@ -115,6 +123,10 @@ class CategoriesController extends Controller
             // get the transactions of the category
             $transactions = Category::find($id)->transactions();
 
+            // filter
+            if (!empty($request->type))
+                $transactions = $transactions->where('type', $request->type);
+
             // remember total records
             session()->flash('total_count', ceil($transactions->count() / 25));
 
@@ -123,13 +135,18 @@ class CategoriesController extends Controller
                 $transactions = $transactions->orderBy($request->sort, $request->order)->simplePaginate(25);
             else
                 $transactions = $transactions->orderBy('date', 'desc')->simplePaginate(25);
-
-            // stuff to pass into view
-            $action = ["CategoriesController@show", $id];
-            $emptyMsg = "No transactions for this category.";
-            $title = "Category Specific Transaction List";
-            $heading = "Category: " . Category::find($id)->name;
         }
+
+        // stuff to pass into view
+        $action = ["CategoriesController@show", $id];
+        $emptyMsg = "No transactions for this category.";
+        $title = "Category Specific Transaction List";
+        if ($id != 0)
+            $heading = "Category: " . Category::find($id)->name;
+        else
+            $heading = "Category: Uncategorized";
+
+        $request->flash();
 
         return view('transactions.index', compact('transactions', 'action', 'emptyMsg', 'title', 'heading'));
     }

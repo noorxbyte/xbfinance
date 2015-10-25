@@ -91,12 +91,20 @@ class PayeesController extends Controller
         if ($id == 0)
         {
             // get transactions without payees
-            $transactions = Transaction::where('user_id', Auth::user()->id)->whereNull('payee_id')->paginate(25);
-        
-            // stuff to pass into view
-            $emptyMsg = "No transactions without payees.";
-            $title = "Transactions by Payee";
-            $heading = "Transactions Without Payees";
+            $transactions = User::find(Auth::user()->id)->transactions()->whereNull('payee_id');
+
+            // filter
+            if (!empty($request->type))
+                $transactions = $transactions->where('type', $request->type);
+
+            // remember total records
+            session()->flash('total_count', ceil($transactions->count() / 25));
+
+            // sort
+            if (!empty($request->sort))
+                $transactions = $transactions->orderBy($request->sort, $request->order)->simplePaginate(25);
+            else
+                $transactions = $transactions->orderBy('date', 'desc')->simplePaginate(25);
         }
         else
         {
@@ -114,6 +122,10 @@ class PayeesController extends Controller
             // get the transactions of the payee
             $transactions = Payee::find($id)->transactions();
 
+            // filter
+            if (!empty($request->type))
+                $transactions = $transactions->where('type', $request->type);
+
             // remember total records
             session()->flash('total_count', ceil($transactions->count() / 25));
 
@@ -122,13 +134,18 @@ class PayeesController extends Controller
                 $transactions = $transactions->orderBy($request->sort, $request->order)->simplePaginate(25);
             else
                 $transactions = $transactions->orderBy('date', 'desc')->simplePaginate(25);
-
-            // stuff to pass into view
-            $action = ['PayeesController@show', $id];
-            $emptyMsg = "No transactions for this payee.";
-            $title = "Payee Specific Transaction List";
-            $heading = "Payee: " . Payee::find($id)->name;
         }
+
+        // stuff to pass into view
+        $action = ['PayeesController@show', $id];
+        $emptyMsg = "No transactions for this payee.";
+        $title = "Payee Specific Transaction List";
+        if ($id != 0)
+            $heading = "Payee: " . Payee::find($id)->name;
+        else
+            $heading = "Payee-less Transactions";
+
+        $request->flash();
 
         return view('transactions.index', compact('transactions', 'action', 'emptyMsg', 'title', 'heading'));
     }
