@@ -22,7 +22,7 @@
 						{!! Form::input('hidden', 'q', null) !!}
 					</div>
 					<div class="form-group">
-						{!! Form::button('Sort', ['type' => 'submit', 'class' => 'btn btn-default input-sm'], 'Sort') !!}
+						{!! Form::button('Sort', ['type' => 'submit', 'class' => 'btn btn-default btn-sm'], 'Sort') !!}
 					</div>
 				{!! Form::close() !!}
 			</div>
@@ -34,7 +34,7 @@
 						{!! Form::input('search', 'q', null, ['id' => 'search', 'class' => 'form-control input-sm', 'placeholder' => 'Search Transfers']) !!}
 					</div>
 					<div class="form-group">
-						{!! Form::button('Search', ['type' => 'submit', 'class' => 'btn btn-default input-sm'], 'Sort') !!}
+						{!! Form::button('Search', ['type' => 'submit', 'class' => 'btn btn-default btn-sm'], 'Sort') !!}
 					</div>
 				{!! Form::close() !!}
 			</div>

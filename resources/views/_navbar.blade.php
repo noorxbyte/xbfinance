@@ -19,7 +19,7 @@
                     </ul>
                 </li>
                 @if(isset($nav_accounts))
-                    <li class="dropdown dropdown-hover {{ (Request::segment(1) == 'accounts' && Request::segment(2) != 'create') ? 'active' : '' }}">
+                    <li class="dropdown dropdown-hover {{ (Request::segment(1) == 'accounts' && !empty(Request::segment(2)) && Request::segment(2) != 'create') ? 'active' : '' }}">
                         <a id="accounts" class="dropdown-toggle" data-toggle="dropdown" href="{{ route('accounts.index') }}">Accounts
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu">
