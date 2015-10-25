@@ -70,7 +70,7 @@
 						<td><a href="{{ route('accounts.show', $transfer['account_from']) }}">{{ $transfer->from->name or '-- N/A --' }}</a></td>
 						<td><a href="{{ route('accounts.show', $transfer['account_to']) }}">{{ $transfer->to->name or '-- N/A --' }}</a></td>
 						<td>${{ number_format($transfer['amount'], 2) }}</td>
-						<td>{{ $transfer['comment'] }}</td>
+						<td class="comment">{{ $transfer['comment'] }}</td>
 					</tr>
 				@endforeach
 			</tbody>

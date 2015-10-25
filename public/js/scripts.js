@@ -87,7 +87,12 @@ $(document).ready(function() {
 	if ($('#search').length)
 	{
 		if ($('#search').val().length > 0)
-			$('table').html($('table').html().replace(new RegExp($('#search').val(), "ig"), '<span class="highlight">' + $('#search').val() + '</span>'));
+		{
+			$('.comment').each(function(i, obj) {
+				var searchRegex = new RegExp('(' + $('#search').val() + ')', "ig");
+				$(obj).html($(obj).html().replace(searchRegex, '<span class="highlight">$1</span>'));
+			});
+		}
 	}
 
 });
