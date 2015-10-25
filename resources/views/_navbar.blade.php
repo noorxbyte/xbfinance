@@ -6,8 +6,8 @@
         </div>
         <div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{ route('home') }}">Home</a></li>
-                <li class="dropdown dropdown-hover">
+                <li class="{{ (Request::segment(1) == 'accounts' && empty(Request::segment(2))) ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>
+                <li class="dropdown dropdown-hover {{ Request::segment(2) == 'create' ? 'active' : '' }}">
                     <a id="unclickable" class="dropdown-toggle" data-toggle="dropdown" href="#">New
                     <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -19,7 +19,7 @@
                     </ul>
                 </li>
                 @if(isset($nav_accounts))
-                    <li class="dropdown dropdown-hover">
+                    <li class="dropdown dropdown-hover {{ (Request::segment(1) == 'accounts' && Request::segment(2) != 'create') ? 'active' : '' }}">
                         <a id="accounts" class="dropdown-toggle" data-toggle="dropdown" href="{{ route('accounts.index') }}">Accounts
                         <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -29,10 +29,10 @@
                         </ul>
                     </li>
                 @endif
-                <li><a href="{{ route('transactions.index') }}">Transactions</a></li>
-                <li><a href="{{ route('transfers.index') }}">Transfers</a></li>
-                <li><a href="{{ route('payees.index') }}">Payees</a></li>
-                <li><a href="{{ route('categories.index') }}">Categories</a></li>
+                <li class="{{ Request::segment(1) == 'transactions' ? 'active' : '' }}"><a href="{{ route('transactions.index') }}">Transactions</a></li>
+                <li class="{{ Request::segment(1) == 'transfers' ? 'active' : '' }}"><a href="{{ route('transfers.index') }}">Transfers</a></li>
+                <li class="{{ Request::segment(1) == 'payees' ? 'active' : '' }}"><a href="{{ route('payees.index') }}">Payees</a></li>
+                <li class="{{ Request::segment(1) == 'categories' ? 'active' : '' }}"><a href="{{ route('categories.index') }}">Categories</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if(Auth::check())
