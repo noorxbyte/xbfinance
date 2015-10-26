@@ -58,6 +58,16 @@ class AccountsController extends Controller
             'name' => 'required|max:32',
         ]);
 
+        // limit user to max 5 accounts
+        if (User::find(Auth::user()->id)->accounts->count() >= 5)
+        {
+            // stuff to pass into view
+            $title = "Error";
+            $errmsg = "You have reached your maximum account limit.";
+
+            return view('errors.error', compact('errmsg', 'title', 'heading'));
+        }
+
         // create a new account
         $account = new Account;
 
