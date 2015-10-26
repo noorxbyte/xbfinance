@@ -29,7 +29,9 @@ class TransactionSeeder extends Seeder
         		'payee_id' => rand(1, 10),
         		'category_id' => rand(1, 20),
         		'amount' => rand(1000, 10000),
-        		'comment' => $faker->sentence($nbWords = 10)
+        		'comment' => $faker->sentence($nbWords = 10),
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime
         	]);
         }
 
@@ -44,7 +46,9 @@ class TransactionSeeder extends Seeder
         		'payee_id' => rand(1, 10),
         		'category_id' => rand(1, 5),
         		'amount' => rand(10, 500),
-        		'comment' => $faker->sentence($nbWords = 10)
+        		'comment' => $faker->sentence($nbWords = 10),
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime
         	]);
         }
  

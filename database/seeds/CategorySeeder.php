@@ -23,7 +23,9 @@ class CategorySeeder extends Seeder
         	array_push($categories, [
         		'id' => $i,
         		'user_id' => 1,
-        		'name' => $faker->word()
+        		'name' => $faker->word(),
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime
         	]);
         }
  

@@ -36,7 +36,9 @@ class TransferSeeder extends Seeder
         		'account_from' => $num1,
         		'account_to' => $num2,
         		'amount' => rand(1, 100),
-        		'comment' => $faker->sentence($nbWords = 10)
+        		'comment' => $faker->sentence($nbWords = 10),
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime
         	]);
         }
  

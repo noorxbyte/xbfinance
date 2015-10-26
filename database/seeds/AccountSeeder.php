@@ -23,7 +23,9 @@ class AccountSeeder extends Seeder
         	array_push($accounts, [
         		'id' => $i,
         		'user_id' => 1,
-        		'name' => $faker->firstName()
+        		'name' => $faker->firstName(),
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime
         	]);
         }
  

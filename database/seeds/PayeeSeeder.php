@@ -23,7 +23,9 @@ class PayeeSeeder extends Seeder
         	array_push($payees, [
         		'id' => $i,
         		'user_id' => 1,
-        		'name' => $faker->company()
+        		'name' => $faker->company(),
+                'created_at' => new DateTime,
+                'updated_at' => new DateTime
         	]);
         }
  
