@@ -67,6 +67,16 @@ class PayeesController extends Controller
             'name' => 'required|max:32'
         ]);
 
+        // prevent duplicate payees
+        if (User::find(Auth::user()->id)->payees()->whereRaw("UPPER(`name`) = UPPER(?)", array($request->name))->count() > 0)
+        {
+            // stuff to pass into view
+            $title = "Error";
+            $errmsg = "Payee with name already exists.";
+
+            return view('errors.error', compact('errmsg', 'title', 'heading'));
+        }
+
         // create new record and save it
         $payee = new Payee;
         $payee->user_id = Auth::user()->id;
@@ -200,6 +210,16 @@ class PayeesController extends Controller
             $errmsg = "The payee does not exist.";
 
             return view('errors.error', compact('errtype', 'errmsg', 'title', 'heading'));
+        }
+
+        // prevent duplicate payees
+        if (User::find(Auth::user()->id)->payees()->whereRaw("UPPER(`name`) = UPPER(?)", array($request->name))->count() > 0)
+        {
+            // stuff to pass into view
+            $title = "Error";
+            $errmsg = "Payee with name already exists.";
+
+            return view('errors.error', compact('errmsg', 'title', 'heading'));
         }
 
         // update the payee

@@ -68,6 +68,16 @@ class CategoriesController extends Controller
             'name' => 'required|max:32'
         ]);
 
+        // prevent duplicate categories
+        if (User::find(Auth::user()->id)->categories()->whereRaw("UPPER(`name`) = UPPER(?)", array($request->name))->count() > 0)
+        {
+            // stuff to pass into view
+            $title = "Error";
+            $errmsg = "Category with name already exists.";
+
+            return view('errors.error', compact('errmsg', 'title', 'heading'));
+        }
+
         // create new record and save it
         $category = new Category;
         $category->user_id = Auth::user()->id;
@@ -198,6 +208,16 @@ class CategoriesController extends Controller
             // stuff to pass into view
             $title = "Error";
             $errmsg = "The category does not exist.";
+
+            return view('errors.error', compact('errmsg', 'title', 'heading'));
+        }
+
+        // prevent duplicate categories
+        if (User::find(Auth::user()->id)->categories()->whereRaw("UPPER(`name`) = UPPER(?)", array($request->name))->count() > 0)
+        {
+            // stuff to pass into view
+            $title = "Error";
+            $errmsg = "Category with name already exists.";
 
             return view('errors.error', compact('errmsg', 'title', 'heading'));
         }
