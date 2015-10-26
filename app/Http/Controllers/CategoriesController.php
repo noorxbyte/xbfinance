@@ -69,13 +69,17 @@ class CategoriesController extends Controller
         ]);
 
         // prevent duplicate categories
-        if (User::find(Auth::user()->id)->categories()->whereRaw("UPPER(`name`) = UPPER(?)", array($request->name))->count() > 0)
+        $categories = User::find(Auth::user()->id)->categories;
+        foreach ($categories as $category)
         {
-            // stuff to pass into view
-            $title = "Error";
-            $errmsg = "Category with name already exists.";
+            if (strcasecmp($category->name, $request->name) == 0)
+            {
+                // stuff to pass into view
+                $title = "Error";
+                $errmsg = "Category with name already exists.";
 
-            return view('errors.error', compact('errmsg', 'title', 'heading'));
+                return view('errors.error', compact('errmsg', 'title', 'heading'));
+            }
         }
 
         // create new record and save it
@@ -213,13 +217,17 @@ class CategoriesController extends Controller
         }
 
         // prevent duplicate categories
-        if (User::find(Auth::user()->id)->categories()->whereRaw("UPPER(`name`) = UPPER(?)", array($request->name))->count() > 0)
+        $categories = User::find(Auth::user()->id)->categories;
+        foreach ($categories as $category)
         {
-            // stuff to pass into view
-            $title = "Error";
-            $errmsg = "Category with name already exists.";
+            if (strcasecmp($category->name, $request->name) == 0)
+            {
+                // stuff to pass into view
+                $title = "Error";
+                $errmsg = "Category with name already exists.";
 
-            return view('errors.error', compact('errmsg', 'title', 'heading'));
+                return view('errors.error', compact('errmsg', 'title', 'heading'));
+            }
         }
 
         // update the category

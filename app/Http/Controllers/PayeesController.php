@@ -68,13 +68,17 @@ class PayeesController extends Controller
         ]);
 
         // prevent duplicate payees
-        if (User::find(Auth::user()->id)->payees()->whereRaw("UPPER(`name`) = UPPER(?)", array($request->name))->count() > 0)
+        $payees = User::find(Auth::user()->id)->payees;
+        foreach ($payees as $payee)
         {
-            // stuff to pass into view
-            $title = "Error";
-            $errmsg = "Payee with name already exists.";
+            if (strcasecmp($payee->name, $request->name) == 0)
+            {
+                // stuff to pass into view
+                $title = "Error";
+                $errmsg = "Payee with name already exists.";
 
-            return view('errors.error', compact('errmsg', 'title', 'heading'));
+                return view('errors.error', compact('errmsg', 'title', 'heading'));
+            }
         }
 
         // create new record and save it
@@ -213,13 +217,17 @@ class PayeesController extends Controller
         }
 
         // prevent duplicate payees
-        if (User::find(Auth::user()->id)->payees()->whereRaw("UPPER(`name`) = UPPER(?)", array($request->name))->count() > 0)
+        $payees = User::find(Auth::user()->id)->payees;
+        foreach ($payees as $payee)
         {
-            // stuff to pass into view
-            $title = "Error";
-            $errmsg = "Payee with name already exists.";
+            if (strcasecmp($payee->name, $request->name) == 0)
+            {
+                // stuff to pass into view
+                $title = "Error";
+                $errmsg = "Payee with name already exists.";
 
-            return view('errors.error', compact('errmsg', 'title', 'heading'));
+                return view('errors.error', compact('errmsg', 'title', 'heading'));
+            }
         }
 
         // update the payee
