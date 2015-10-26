@@ -21,7 +21,7 @@ class PayeesController extends Controller
     public function index()
     {
         // get user's payees
-        $payees = Payee::with('transactions')->where('user_id', Auth::user()->id)->get();
+        $payees = Payee::with('transactions')->where('user_id', Auth::user()->id)->orderBy('name', 'ASC')->get();
 
         // get all transactions of the user
         $transactions = Transaction::where('user_id', Auth::user()->id)->get();

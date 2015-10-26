@@ -22,7 +22,7 @@ class CategoriesController extends Controller
     public function index()
     {
         // get user's categories
-        $categories = Category::with('transactions')->where('user_id', Auth::user()->id)->get();
+        $categories = Category::with('transactions')->where('user_id', Auth::user()->id)->orderBy('name', 'ASC')->get();
 
         // get all transactions of the user
         $transactions = Transaction::where('user_id', Auth::user()->id)->get();
