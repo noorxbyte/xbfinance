@@ -102,6 +102,7 @@ class TransfersController extends Controller
             $transfer->account_from = $request->account_from;
             $transfer->account_to = $request->account_to;
             $transfer->amount = $request->amount;
+            $transfer->comment = $request->comment;
 
             // save transfer
             $transfer->save();
@@ -258,6 +259,7 @@ class TransfersController extends Controller
             else
                 $transfer->account_to = $request->account_to;
             $transfer->amount = round($request->amount, 2);
+            $transfer->comment = $request->comment;
 
             // save transfer
             $transfer->save();
